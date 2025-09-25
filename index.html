@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="author" content="Georgios Mentzelopoulos, Ioannis Asmanis">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spikachu</title>
+    <link rel="shortcut icon" href="assets/thunderbolt_pikachu.jpg" />
+    <script src="https://kit.fontawesome.com/3875b07657.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://bulma.io/css/bulma-docs.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons/css/academicons.min.css">
+    <link rel="stylesheet" href="build/style.css">
+
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-3.2.2.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-api-3.2.2.min.js"></script>
+    <script src="./js/mat4js.read.min.js"></script>
+    <script type="module" src="./js/script.js"></script>
+    <script src="./js/spike-vis.js"></script>
+    <script src="./js/query-vis.js"></script>
+    <script src="./js/sample-vis.js"></script>
+    <script src="./js/finetune-vis.js"></script>
+
+    <!-- <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r153/three.module.js"></script> -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L6PHX4M5RR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-L6PHX4M5RR');
+    </script>
+    <script>
+        function resizeIframe(obj) {
+            obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+        }
+    </script>
+</head>
+
+<body>
+    <section class="section title-section">
+
+        <h1 class="page-title">
+            Spikachu
+            <img src="./assets/thunderbolt_pikachu.jpg" alt="spikachuImage" style="
+            width: 60px; 
+            height: 60px; 
+            object-fit: cover; 
+            vertical-align: middle; 
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+         ">
+        </h1>
+
+        <h2 class="title page-title">
+            A Scalable, Causal, and Energy Efficient Framework for Neural Decoding with Spiking Neural Networks
+        </h2>
+        </div>
+        <div class="header authors">
+            <a href="https://gmentz.github.io/">Georgios Mentzelopoulos</a><sup>1, *</sup>
+            <a href="https://www.linkedin.com/in/asmanisioannis/">Ioannis Asmanis</a><sup>1, *</sup>
+            <a href="https://kordinglab.com/people/konrad_kording/index.html">Konrad P. Kording</a><sup>1</sup>
+            <a href="https://nerdslab.github.io/people.html">Eva L. Dyer</a><sup>1</sup>
+            <a href="https://www.cis.upenn.edu/~kostas/">Kostas Daniilidis</a><sup>1, 2, &dagger;</sup>
+            <a href="https://vitalelab.med.upenn.edu/dr-flavia-vitale-bio/">Flavia Vitale</a><sup>1, &dagger;</sup>
+
+        </div>
+        <div class="affiliations">
+            <sup>1</sup> <img src="./assets/logos/penn_logo_2.png" alt="UPenn Logo" class="affiliation-logo"> University
+            of Pennsylvania
+            <sup>2</sup> <img src="./assets/logos/archimedes_logo.png" alt="Archimedes logo" class="affiliation-logo">
+            Archimides, Athena RC
+        </div>
+        <div class="affiliations">
+            <p style="font-size: 16px;">
+                <sup>*, &dagger;</sup> These authors contributed equally as co- {<sup>*</sup>first,
+                <sup>&dagger;</sup>last} authors.
+            </p>
+            <!-- <p style="font-size: 16px;">
+                <sup>&dagger;</sup> Contact: {gment, asmanis, kostas, vitalef}@upenn.edu
+            </p> -->
+
+        </div>
+
+        <div class="links">
+            <a href="#" class="coming-soon">
+                <i class="fa fa-file"></i> Paper
+                <span class="tooltip-text">Coming soon</span>
+            </a>
+            <a href="#" class="coming-soon">
+                <i class="fa fa-github"></i> Code
+                <span class="tooltip-text">Coming soon</span>
+            </a>
+        </div>
+
+
+        <!-- <div class="links" >
+            <a href="#" class="coming-soon">
+                <i class="fa fa-file"></i> Paper
+            </a>
+            <a href="#" class="coming-soon">
+                <i class="fa fa-github"></i> Code
+            </a>
+        </div> -->
+
+    </section>
+
+    <aside class="sidebar">
+        <ul>
+            <li> Contents </li>
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#evaluation">Evaluation</a></li>
+            <li><a href="#conclusions">Conclusions</a></li>
+            <li><a href="#acknowledgements">Acknowledgements</a></li>
+            <li><a href="#citation">Cite us</a></li>
+            <!-- Add more sections as needed -->
+        </ul>
+    </aside>
+
+
+    <div class="main-content">
+
+        <section class="section" id="abstract">
+            <h3 class="section-title">
+                Abstract
+            </h3>
+            <p>
+                Brain-computer interfaces (BCIs) promise to enable vital functions, such as speech and prosthetic
+                control, for individuals with neuromotor impairments.
+                Central to their success are neural decoders, models that map neural activity to intended behavior.
+                Current learning-based decoding approaches fall into two classes: simple, causal models that lack
+                generalization, or complex, non-causal models that generalize and scale offline but struggle in
+                real-time settings.
+                Both face a common challenge, their reliance on power-hungry artificial neural network backbones, which
+                makes integration into real-world, resource-limited systems difficult.
+                Spiking neural networks (SNNs) offer a promising alternative.
+                Because they operate causally (i.e. only on present and past inputs) these models are suitable for
+                real-time use, and their low energy demands make them ideal for battery-constrained environments.
+
+                To this end, we introduce <b>Spikachu: a scalable, causal, and energy-efficient neural decoding
+                    framework based on SNNs</b>.
+                Our approach processes binned spikes directly by projecting them into a shared latent space, where
+                spiking modules, adapted to the timing of the input, extract relevant features; these latent
+                representations are then integrated and decoded to generate behavioral predictions.
+
+                We evaluate our approach on 113 recording sessions from 6 non-human primates, totaling 43 hours of
+                recordings.
+                Our method outperforms causal baselines when trained on single sessions using between 2.26× and 418.81×
+                less energy.
+                Furthermore, we demonstrate that scaling up training to multiple sessions and subjects improves
+                performance and enables few-shot transfer to unseen sessions, subjects, and tasks.
+                Overall, Spikachu introduces a scalable, online-compatible neural decoding framework based on SNNs,
+                whose performance is competitive relative to state-of-the-art models while consuming orders of magnitude
+                less energy.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="mission">
+            <h3 class="section-title">
+                <a href=""> </a> Mission
+            </h3>
+
+            <h3 class="subsection-title">
+                Design constraints of neural decoders
+            </h3>
+
+            <p>
+                Deep learning has transformed neural decoding, moving beyond traditional methods that depend on
+                hand-crafted features. Artificial neural networks (ANNs) can now learn to map neural activity
+                to intended actions directly from data, unlocking far greater performance.
+
+                Yet, building neural decoders that are practical for real-world brain-computer
+                interface (BCI) systems remains an open challenge. To be truly effective, models must balance multiple
+                constraints:
+            </p>
+
+
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Energy efficiency</b>: Neural decoders need to be
+                        energy-efficient to operate within the tight power budgets of battery-constrained implantable
+                        BCI devices.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Causality</b>: To enable online operation, models must be causal
+                        (i.e. rely only on present and past inputs).
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Scalability</b>: Models need to scale to heterogeneous neural
+                        datasets, since scaling has been shown to boost decoding performance in multiple domains
+                        including neural decoding.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Generalization</b>: Models should generalize to new subjects and
+                        tasks with minimal training examples to reduce the need for lengthy calibration sessions that
+                        hinder the practical deployment of BCIs.
+                    </span>
+                </li>
+            </ul>
+
+
+            <div class="figure" style="text-align: center; max-width: 95%;">
+                <img src="assets/NeuralDecoderConstraints.svg" alt="Constraints"
+                    style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                <div class="caption" style="text-align: center; font-size: 0.9em; color: #555;">
+                    <p>Figure 1: Constraints of practical neural decoding models.</p>
+                </div>
+            </div>
+
+
+            <h3 class="subsection-title">
+                The landscape of neural decoders
+            </h3>
+
+            <p>
+                While significant progress has been made along each of these constraints, to our knowledge, no single
+                framework excels across all of them simultaneously.
+                Existing approaches tend to fall into two main categories, each with its own shortcomings.
+            </p>
+
+
+            <div class="table">
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Model</th>
+                            <th style="text-align: center;">Energy efficiency</th>
+                            <th style="text-align: center;">Causality</th>
+                            <th style="text-align: center;">Scalability</th>
+                            <th style="text-align: center;">Generalization</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"Simple": <a href=""> Wiener Filter, MLPs, GRUs, ... </a></td>
+                            <td style="text-align: center; color: red;">➖</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                            <td style="text-align: center; color: red;">➖</td>
+                            <td style="text-align: center; color: red;">➖</td>
+                        </tr>
+                        <tr>
+                            <td> "Sophisticated":
+                                <a href="https://cebra.ai/">Cebra</a>,
+                                <a href="https://arxiv.org/abs/1608.06315">LFADS</a>,
+                                <a href="https://poyo-brain.github.io/">POYO</a>,
+                                <a href="https://www.nature.com/articles/s41586-025-08829-y">MICrONS</a>, ...
+                            </td>
+                            <td style="text-align: center; color: red;">➖</td>
+                            <td style="text-align: center; color: red;">➖</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="caption">
+                    <p><b>Table 1:</b> The landscape of neural decoders.</p>
+                </div>
+            </div>
+
+            <p>
+                On one
+                hand,
+                simple models, often based on traditional architectures like multi-layer perceptrons (MLPs) or Gated
+                Recurrent Units (GRUs), tend to perform well within individual experiments. These methods are
+                typically
+                causal, making them particularly attractive for online applications, but require homogeneous input
+                structures, making them difficult to scale or generalize across
+                subjects. On the other hand, more
+                sophisticated frameworks that can be trained across datasets have demonstrated strong performance
+                and
+                generalization, particularly at scale. However, their lack of causal processing and heavy
+                computational demands challenges their applicability outside the research lab.
+            </p>
+
+
+            <h3 class="subsection-title">
+                An unexplored alternative for neural decoding
+            </h3>
+
+            <p>
+                Spiking neural networks offer a promising alternative. Their inherent causality supports
+                integration into online systems, and their low computational footprint makes them well-suited for
+                battery-constrained environments such as implantable BCIs.
+            </p>
+
+
+            <div class="figure" style="text-align: center; max-width: 90%;">
+                <img src="assets/AnnsVsSnns.svg" alt="AnnsVsSnns"
+                    style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                <div class="caption" style="text-align: center; font-size: 0.9em; color: #555;">
+                    <p>Figure 2: Schematic comparison between artificial neural networks vs spiking neural networks.</p>
+                </div>
+            </div>
+
+            <p>
+                Unlike conventional ANNs which rely on static activations like ReLU, which are always active during
+                inference, SNNs employ stateful activations
+                like the <a href="https://arxiv.org/abs/2303.10780">Leaky-Integrate-and-Fire</a>, which only activate
+                when they spike. This property makes SNNs remarkably energy-efficient during
+                inference compared to ANNs, particularly when deployed on neuromorphic hardware.
+                Furthermore, their event-driven, online nature makes them well-suited for
+                processing real-time or asynchronous data streams like spike trains.
+            </p>
+
+
+
+        </section>
+
+
+        <section class="section" id="approach">
+            <h3 class="section-title">
+                <a href=""> </a> Approach
+            </h3>
+
+            <p>
+                In this work, we asked a simple but fundamental question: <b>Can we build effective neural decoders
+                    using spiking neural networks? </b>
+                To answer this question, we introduce <b>Spikachu: a causal, scalable, and energy-efficient framework
+                    for
+                    neural decoding based on spiking neural networks</b>.
+                Our framework consists of two main components, outlined below.
+            </p>
+
+            <h3 class="subsubsection-title">ANN Harmonizer</h3>
+
+
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Tokenization</b>: We extend the formulation of binned spikes by
+                        binning neural activity and representing each spike as a token
+                        using learnable embeddings, similar to
+                        <a href="https://arxiv.org/abs/2310.16046">Azabou et al. (2023)</a>.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Harmonizer</b>: The tokenized neural activity of a
+                        timebine is then projected into a common latent space, shared across
+                        sessions and subjects using the <a href="https://arxiv.org/abs/2310.16046">PerceiverIO</a>
+                        encoder.
+                    </span>
+                </li>
+            </ul>
+
+
+
+            <div style="width: 100%; text-align: center;">
+                <img src="assets/SpikachuFramework.svg" alt="Spikachu Architecture"
+                    style="width: 90%; height: auto; display: block; margin: 0 auto;">
+                <div style="text-align: center; margin-top: 0.5em;">
+                    <p>Figure 3: Overview of the Spikachu framework.</p>
+                </div>
+            </div>
+
+            <h3 class="subsubsection-title">SNN Backbone</h3>
+
+            <p>
+                After harmonizing the data, we process the latents with a series of SNN modules which are far more
+                energy-efficient than ANNs:
+            </p>
+
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Multi scale SNN I</b>: This module processes the latent
+                        through parallel spiking MLPs, each operating at different temporal scales.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Spiking self attention</b>: This module processes the latent
+                        for long-range dependencies across temporal scales using the attention variant introduced by
+                        <a href="https://arxiv.org/abs/2209.15425">Zhou et al. (2023)</a>.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Spiking MLP</b>: This module mixes the spatial and temporal
+                        information of the latents and projects them to a low-dimensional representation.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Multi scale SNN II</b>: This module again uses parallel
+                        spiking MLPs to process the latents at different temporal scales.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Membrane potential observer layer</b>: This layer is composed
+                        of neurons that never spike and whose membrane potential never resets. Instead of monitoring
+                        their output, we use their membrane potential to track continuous variables.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Linear</b>: This conventional linear layer projects the membrane
+                        potential of the
+                        observer neurons to behavioral predictions.
+                    </span>
+                </li>
+            </ul>
+
+        </section>
+
+
+        <section class="section" id="evaluation">
+            <h3 class="section-title">
+                <a href="evaluation"> </a>Evaluation
+            </h3>
+
+            <h3 class="subsection-title">
+                Dataset
+            </h3>
+            <p>
+                To evaluate Spikachu's effectiveness for causal, scalable, and energy efficient neural decoding we
+                worked with a large collection of publically available datasets curated by <a
+                    href="https://arxiv.org/abs/2310.16046"> Azabou et al. (2023)</a> and <a
+                    href="https://arxiv.org/abs/2109.04463"> Pei et al. (2021)</a>
+                that can be accessed through <a
+                    href='https://dandiarchive.org/dandiset/000688?search=azabou&pos=1'>Dandi</a> (used in this work) or
+                <a
+                    href='https://brainsets.readthedocs.io/en/latest/glossary/brainsets.html#perich-miller-population-2018'>brainsets</a>.
+                The dataset contains electrophysiological recordings from motor
+                cortical regions of monkeys performing motor tasks of varying complexities.
+            </p>
+
+
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Center Out (CO)</b>: a relatively stereotyped task where the
+                        animal controls a cursor that begins at the center of a screen. After a go cue, the animal
+                        reaches toward one of eight targets and then returns to center.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Random Target (RT)</b>: a more complex task where the
+                        monkey makes self-paced movements, with new targets appearing in succession at random screen
+                        locations.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Touchscreen Random Target (RTT)</b>: a continuous
+                        variant of the random target task which was performed on a touchscreen tablet instead of using a
+                        manipulandum.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Maze</b>: for this task, the animal performs reaches from an
+                        initial location while carefully avoiding the boundaries of a virtual maze, using a touchscreen
+                        tablet instead of a manipulandum.
+                    </span>
+                </li>
+            </ul>
+
+
+            <div class="figure" style="text-align: center; max-width: 80%;">
+                <img src="assets/neurips_2025_neural_decoding_with_snns.svg" alt="dataset"
+                    style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                <div class="caption" style="text-align: center; font-size: 0.9em; color: #555;">
+                    <p>Figure 4: Datasets used in this work. Lock represents animals that were held-out for testing.
+                    </p>
+                </div>
+            </div>
+
+            <p>
+                In total, this dataset spans over 100 behavioral sessions, 43 hours of recordings, with 10,410 units
+                from the primary motor (M1) and premotor (PMd) regions in the cortex of 6 nonhuman primates, and more
+                than 20 million behavioral samples providing a rich foundation to thoroughly assess our approach.
+
+            </p>
+
+            <div class="table">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Study</th>
+                            <th>Regions</th>
+                            <th>Tasks</th>
+                            <th># Individuals</th>
+                            <th># Sessions</th>
+                            <th># Units</th>
+                            <th># Spikes</th>
+                            <th># Behavior Timepoints </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://dandiarchive.org/dandiset/000688">Perich et al.</a></td>
+                            <td>M1, PMd</td>
+                            <td>Center Out, Random Target</td>
+                            <td>4</td>
+                            <td>111</td>
+                            <td>10,410</td>
+                            <td>111.39M</td>
+                            <td>20M</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://neurallatents.github.io/datasets.html#mcmaze">NLB-Maze</a></td>
+                            <td>M1</td>
+                            <td>Maze</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>182</td>
+                            <td>3.6M</td>
+                            <td>6.8M</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://neurallatents.github.io/datasets.html#mcrtt">NLB-RTT</a></td>
+                            <td>M1, S1</td>
+                            <td>Random Target</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>130</td>
+                            <td>1.5M</td>
+                            <td>2.8M</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="caption">
+                    <p> <b>Table 2:</b> Datasets used in this work. </p>
+                </div>
+            </div>
+
+
+            <h3 class="subsection-title">
+                Benchmarking on single-sessions.
+            </h3>
+
+            <p>We first benchmarked our approach on a single-session setting. To do so, we trained single-session
+                models on 99 recording sessions from <a href="https://doi.org/10.1016/j.neuron.2018.09.030">Perich et
+                    al.
+                    (2018)</a>. Along Spikachu, we trained a variety of traditional and state-of-the-art models
+                used for neural decoding to benchmark spikachu's pertformance.
+            </p>
+
+            <div class="figure" style="text-align: center; max-width: 90%;">
+                <img src="assets/singe_session_performance.png" alt="manuscipt_figure_1"
+                    style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                <div class="caption" style="text-align: center; font-size: 0.9em; color: #555;">
+                    <p>Figure 5: Benchmarking on single sessions. (A) Tasks used, (B) Examples decoded velocities, (C)
+                        Mean decoding performance and energy consumption for Spikachu
+                        and baselines.</p>
+                </div>
+            </div>
+
+            <p>
+                We evaluated the models over two key axes (see Figure 5):
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title"> Decoding Performance </b>: Spikachu outperformed all causal
+                        baselines
+                        while narrowing the gap with non-causal models
+                        (POYO).
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        <b class="subsubsection-title">Energy efficiency </b>: Spikachu was the
+                        most energy-efficient model across the board.
+                    </span>
+                </li>
+            </ul>
+
+            The average performance across the 99 single-sessions for each model is summarized in Table 3.
+            </p>
+
+            <div class="table">
+                <table border="1" style="border-collapse: collapse; text-align: center;">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="vertical-align: middle;">Model</th>
+                            <th colspan="2" style="text-align: center;">Decoding Performance (R²) &#8679;</th>
+                            <th colspan="2" style="text-align: center;">Energy (μJ) &#8681;</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center;">Center Out</th>
+                            <th style="text-align: center;">Random Target</th>
+                            <th style="text-align: center;">Center Out</th>
+                            <th style="text-align: center;">Random Target</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left;">LSTM</td>
+                            <td style="text-align: center;">0.4935</td>
+                            <td style="text-align: center;">0.4214</td>
+                            <td style="text-align: center;">15.08</td>
+                            <td style="text-align: center;">14.94</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">MLP</td>
+                            <td style="text-align: center;">0.7424</td>
+                            <td style="text-align: center;">0.5724</td>
+                            <td style="text-align: center;">12.18</td>
+                            <td style="text-align: center;">12.06</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">POYO-causal</td>
+                            <td style="text-align: center;">0.7961</td>
+                            <td style="text-align: center;">0.5629</td>
+                            <td style="text-align: center;">2151.65</td>
+                            <td style="text-align: center;">2136.82</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">GRU</td>
+                            <td style="text-align: center;">0.8336</td>
+                            <td style="text-align: center;">0.6681</td>
+                            <td style="text-align: center;"><u>11.65</u></td>
+                            <td style="text-align: center;"><u>11.54</u></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">POYO</td>
+                            <td style="text-align: center;"><b>0.8937</b></td>
+                            <td style="text-align: center;"><b>0.6785</b></td>
+                            <td style="text-align: center;">2151.65</td>
+                            <td style="text-align: center;">2136.82</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: left;">Spikachu</td>
+                            <td style="text-align: center;"><u>0.8398</u></td>
+                            <td style="text-align: center;"><u>0.6761</u></td>
+                            <td style="text-align: center;"><b>5.14</b></td>
+                            <td style="text-align: center;"><b>5.13</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="caption">
+                    <p><b>Table 3:</b> Model performance for Spikachu and baselines. Best performing model is in
+                        <b>bold</b> and second best model is <u>underlined</u>.
+                    </p>
+                </div>
+            </div>
+
+
+
+
+            <p>These results highlight <b>Spikachu's dual promise: high-performance and energy
+                    efficiency</b>, making it a strong candidate for power-constrained applications such as implantable
+                BCIs.
+            </p>
+
+            <h3 class="subsection-title">
+                <a href=""> </a><b>Spikachu-mp</b>: Building a multi-session, multi-subject model.
+            </h3>
+            <p>
+                To investigate Spikachu's ability to scale to multi-session, multi-subject data, we developed
+                <b>Spikachu-mp</b>. This model was trained on the combined data of 99
+                recording sessions from monkeys C, J, and M from <a
+                    href="https://doi.org/10.1016/j.neuron.2018.09.030">Perich et
+                    al. (2018)</a>.
+            </p>
+
+            <p>
+                To evaluate the utility of these learned representations, we finetuned Spikachu-mp on individual
+                sessions.
+            </p>
+
+
+            <div class="figure" style="text-align: center; max-width: 90%;">
+                <img src="assets/spikachu_mp_vs_ss.svg" alt="smp_vs_ss"
+                    style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                <div class="caption" style="text-align: center; font-size: 0.9em; color: #555;">
+                    <p>Figure 6: Head-to-head comparison between <b>Spikachu-mp</b> + finetuning vs Spikachu trained on
+                        single-sessions. (A) Decoding Performance, (B) Energy consumption per inference. </p>
+                </div>
+            </div>
+
+
+            <p>We observed that <b>the finetuned models outperformed models trained from scratch for nearly every
+                    session in terms of
+                    decoding performance
+                    while also consuming less energy per inference</b> (see Fig. 6).</p>
+
+
+
+            <h3 class="subsection-title">
+                <a href=""> </a>Transferring to new subjects
+            </h3>
+
+            <p>
+                We asked whether the representations learned by <b>Spikachu-mp</b> could be transferred to entirely new
+                subjects.
+                To test this, we used data from a held-out monkey (T) who performed six sessions of the Center Out task
+                and six sessions of the Random Target task.
+                We compared two approaches:
+
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Training models from scratch on each of Monkey T’s sessions.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Transferring from <b>Spikachu-mp</b>, which had been trained on monkeys C, J, and M but had
+                        never seen Monkey T’s data.
+                    </span>
+                </li>
+            </ul>
+            </p>
+
+            <div class="figure" style="text-align: center; max-width: 100%;">
+                <img src="assets/transferring_slide.svg" alt="transferring_slide"
+                    style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                <div class="caption" style="text-align: center; font-size: 0.9em; color: #555;">
+                    <p>Figure 7: Tranferring <b>Spikachu-mp</b> to new subjects. (A). Decoding Performance, (B) Energy
+                        consumption,
+                        (C, D) Learning dynamics for the CO and RT tasks.</p>
+                </div>
+            </div>
+
+            <p>
+                Head-to-head comparisons between the from-scratch and transferred models confirmed that transferred
+                models (see Figure 7):
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Outperformed from-scratch models in decoding accuracy.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Required less energy per inference across all sessions.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Learned faster than models trained from scratch.
+                    </span>
+                </li>
+            </ul>
+
+            These results demonstrate that <b>Spikachu-mp learns general neural representations that can be
+                transferred to
+                new subjects, enabling better performance, more efficient inference, and faster training</b> a crucial
+            step
+            toward practical
+            deployment of BCIs.
+
+            </p>
+
+
+            <h3 class="subsection-title">
+                <a href=""> </a>Scaling Analysis
+            </h3>
+
+            <p>
+                We were interested in profiling how Spikachu's performance scales as the amount of pretraining data
+                increases. To investigate this, in addition to <b>Spikachu-mp</b>, we trained models on 20, 49, and 75
+                sessions from <a href="https://doi.org/10.1038/s41593-018-0089-9">Perich et al. (2018)</a>.
+                We then finetuned each pretrained model to three different conditions:
+            </p>
+
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Seen sessions: Finetuning on the same sessions used for pretraining.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        New sessions: Transferring to unseen sessions from the same subjects used for
+                        pretraining.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        New subject: Transferring to sessions from a completely new subject (monkey T) never seen
+                        during pretraining.
+                    </span>
+                </li>
+            </ul>
+
+            <div class="figure" style="text-align: center; max-width: 90%;">
+                <img src="assets/scaling_analysis.svg" alt="smp_vs_ss"
+                    style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                <div class="caption" style="text-align: center; font-size: 0.9em; color: #555;">
+                    <p>Figure 8: Scaling Analysis. (A, B) Decoding performance
+                        of finetuned/transferred models as a function of the number of pretraining sessions. Panels (C,
+                        D) Energy consumption per inference for
+                        finetuned/transferred models as a function of the number of pretraining sessions. Performance of
+                        scratch-trained single-session models overlayed in gray.</p>
+                </div>
+            </div>
+
+            <p>
+                The results showed that pretrained models, after finetuning, consistently
+                outperform models trained from scratch across
+                all conditions. Importantly, <b>the performance gains scaled positively with the number of sessions used
+                    for pretraining</b> (as seen by the growing gap between
+                colored and gray bars in Figure 8). Together, these findings demonstrate Spikachu’s ability to scale
+                across
+                multi-session, multi-subject
+                datasets, showing not just improved accuracy, but also enhanced energy efficiency.
+            </p>
+
+
+            <h3 class="subsection-title">
+                <a href=""> </a>Transferring to new animals + tasks
+            </h3>
+
+            <p>
+                To further probe Spikachu's ability to generalize, we investigated whether <b>Spikachu-mp</b>
+                could be transferred to entirely new conditions: a new animal performing a novel behavioral task
+                with different recording equipment.
+                Specifically, we used data from two held-out monkeys, L and I, from <a
+                    href="https://neurallatents.github.io/"> Pei et al. (2021)</a>, who performed two new tasks not
+                included in <b>Spikachu-mp</b>’s pretraining. We compared two conditions:
+            </p>
+
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Training single-session models from scratch.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Transferring from the pretrained <b>Spikachu-mp</b> model.
+                    </span>
+                </li>
+            </ul>
+
+            <div class="figure" style="text-align: center; max-width: 90%;">
+                <img src="assets/transferring_new_subject_and_task.svg" alt="transferring_new_subject_and_task"
+                    style="width: 100%; height: auto; display: block; margin: 0 auto;">
+                <div class="caption" style="text-align: center; font-size: 0.9em; color: #555;">
+                    <p>Figure 9: Generalizing to new animals + tasks. Plots show the learning dynamics for the RTT (top)
+                        and Maze (bottom) tasks.</p>
+                </div>
+            </div>
+
+            <p>
+                Head-to-head comparisons between the from-scratch and transferred models showed that transferred
+                models (see Fig. 9):
+            </p>
+            <ul style="list-style: none; padding-left: 0;">
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Performed inferiorly to from-scratch models in terms of decoding accuracy.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Required less energy per inference.
+                    </span>
+                </li>
+                <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                    <i class="fa-solid fa-arrow-right" style="margin-right: 8px; margin-top: 3px;"></i>
+                    <span>
+                        Learned faster than models trained from scratch.
+                    </span>
+                </li>
+            </ul>
+
+            <p>
+                These results highlight a key tradeoff: while performance may slightly decrease in completely novel
+                conditions, <b>transfer learning still provided substantial gains in energy efficiency and training
+                    speed</b>,
+                which are critical for rapid deployment and adaptation in practical BCIs.
+            </p>
+
+        </section>
+
+        <section class="section" id="conclusions">
+
+            <h3 class="section-title">
+                <a href=""> </a>Conclusions
+            </h3>
+
+            <p>
+                In this work, we introduced <b>Spikachu: a causal, scalable, and energy-efficient framework for
+                    neural decoding based on spiking neural networks. </b> Contrary to other frameworks, Spikachu
+                offers a balanced performance in terms of energy efficiency, causality, scalability, and
+                generalization.
+            </p>
+
+            <div class="table">
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Model</th>
+                            <th style="text-align: center;">Energy efficiency</th>
+                            <th style="text-align: center;">Causality</th>
+                            <th style="text-align: center;">Scalability</th>
+                            <th style="text-align: center;">Generalization</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>"Simple": <a href=""> Wiener Filter, MLPs, GRUs, ... </a></td>
+                            <td style="text-align: center; color: red;">➖</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                            <td style="text-align: center; color: red;">➖</td>
+                            <td style="text-align: center; color: red;">➖</td>
+                        </tr>
+                        <tr>
+                            <td> "Sophisticated":
+                                <a href="https://cebra.ai/">Cebra</a>,
+                                <a href="https://arxiv.org/abs/1608.06315">LFADS</a>,
+                                <a href="https://poyo-brain.github.io/">POYO</a>,
+                                <a href="https://www.nature.com/articles/s41586-025-08829-y">MICrONS</a>, ...
+                            </td>
+                            <td style="text-align: center; color: red;">➖</td>
+                            <td style="text-align: center; color: red;">➖</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                        </tr>
+                        <tr>
+                            <td> <b>Spikachu</b></td>
+                            <td style="text-align: center; color: green;">✚</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                            <td style="text-align: center; color: green;">✚</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="caption">
+                    <p><b>Table 4:</b> The landscape of neural decoders + Spikachu</p>
+                </div>
+            </div>
+
+            <p>
+                By uniting energy efficiency, causality, scalability, and generalization, Spikachu paves the way for
+                practical, reliable BCIs
+                that can make a real impact in clinical and assistive settings.
+
+            </p>
+
+
+        </section>
+
+        <section class="section" id="acknowledgements">
+
+            <h3 class="section-title">
+                Acknowledgements
+            </h3>
+
+            <p>
+                This website was built using code from <a href="https://poyo-brain.github.io">
+                    https://poyo-brain.github.io</a> and <a href="https://gmentz.github.io/seegnificant">
+                    https://gmentz.github.io/seegnificant</a>.
+            </p>
+
+        </section>
+
+
+        <section class="section" id="citation">
+            <h3 class="section-title">
+                Citation
+            </h3>
+            If you find this useful for your research, please consider citing our work:
+
+            <!-- <div class="citation">
+                <pre><code>@inproceedings{mentzelopoulos2024neural,
+ author = {Mentzelopoulos, Georgios and Chatzipantazis, Evangelos and Ramayya, Ashwin and Hedlund, Michelle and Buch, Vivek and Daniilidis, Kostas and Kording, Konrad and Vitale, Flavia},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {A. Globerson and L. Mackey and D. Belgrave and A. Fan and U. Paquet and J. Tomczak and C. Zhang},
+ pages = {108600--108624},
+ publisher = {Curran Associates, Inc.},
+ title = {Neural decoding from stereotactic EEG: accounting for electrode variability across subjects},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2024/file/c473b9c8897f50203fa23570687c6b30-Paper-Conference.pdf},
+ volume = {37},
+ year = {2024}
+}</code></pre>
+            </div> -->
+            <div class="citation">
+                <pre><code> Citation coming soon...</code></pre>
+            </div>
+        </section>
+    </div>
+
+    <!-- <footer class="footer">
+    <div class="section content">
+
+        <div style="font-size: 1em;">Vitale Lab</div>
+    </div>
+</footer> -->
+
+    </div>
+
+
+
+</body>
+
+</html>
